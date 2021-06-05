@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice from Thapa Technical Tutorial</title>
+</head>
+<body>
+    <script>
+
+        let myString = " i am from \'Pakistan\'";
+        let newst = myString.toLocaleLowerCase()
+        console.log(myString.indexOf('f'));
+        var current_date = new Date();
+        console.log(current_date.toLocaleString());
+        console.log("*************** Date Practice **********************");
+        var myDate = new Date('March 25,1995 11:13:00');// string as date
+        console.log(myDate.toString());
+        var dateraw = new Date('1995/03/21');// year,month,date
+        console.log(dateraw.toLocaleString());
+
+        var dateday = Date.now();
+        dateday = new Date(dateday);
+        console.log(dateday);
+        "use strict";
+       xds = 1;
+        console.log(xds);
+        console.log('************ Callbacks *************')
+        var add = (a,b) => a+b; 
+        var subs = (a,b) => a-b;
+        var multi = (a,b) => a*b;
+        var divs = (a,b) => a/b;
+
+        var cals = (a,b,operator) => operator(a,b);
+        console.log(cals(2,2,multi)); 
+        console.log('Hoisting is a mechanism which moves vars and funcs decleration on top of their execution');
+    //     console.log(hos);
+    //    let hos;
+    //     hos = "Hoisting";
+        console.log("********************* Lexical Scopping ***************************");
+        let a = "Assalam O Alaikum Guys";
+
+
+        
+       let  uppers = () => {
+            console.log(a);
+            let b = `${a} ! how are you all ?`; 
+            inners = () => console.log(b)
+           return inners;
+        }
+       
+        uppers()();
+        console.dir(uppers());
+        console.log("************* Function Currying ********************");
+        var sum = (num1) => {
+            return (num2) => {
+                console.log("Sum is : ",(num1+num2));
+            return (num3) => {
+                console.log("Sum is :",(num1+num2+num3))
+            }
+            }
+        }
+        summer = (a) => (b) => console.log((a+b));
+        summer(2)(2);
+        sum(2)(3)(2);
+ </script>
+</body>
+</html>
