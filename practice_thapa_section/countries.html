@@ -1,0 +1,48 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Countries API AJAX CONSUMPTION</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" >
+        </head>
+        <style>
+            #main{
+             margin: 119px;  
+            }
+        </style>
+        <body>
+            <div id= "main" class="container">
+
+            </div>
+            <script>
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.open('GET','https://restcountries.eu/rest/v2/name/pakistan');
+                xmlhttp.send();
+                xmlhttp.addEventListener('load',function(){
+                    var [data] = JSON.parse(this.responseText);
+                    var htmldoc = `
+                                    <div class="card" style="width: 18rem;">
+                        <img src="${data.flag}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${data.name}</h5>
+                            <p class="card-text">${data.altSpellings[2]}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Population: ${data.population}</li>
+                            <li class="list-group-item">Native Language: ${data.languages[1].name}</li>
+                            <li class="list-group-item">Capital: ${data.capital}</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="#" class="card-link">${data.region}</a>
+                            <a href="#" class="card-link">${data.subregion}</a>
+                        </div>
+                        </div>`;
+                    var main = document.getElementById('main'); 
+                    main.insertAdjacentHTML('afterbegin',htmldoc);
+                });
+                
+            </script>
+        </body>
+        </html>
