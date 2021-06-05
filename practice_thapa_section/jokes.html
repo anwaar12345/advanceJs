@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOKES PROJECT</title>
+</head>
+<body>
+    <div class="container">
+        <h3>Using Fetch APi to Collect JOKES 🤣 </h3>
+        <div id="joke" class="joke"> 😆 JOKE is Loading </div>
+        <button id="nextJoke">Next Joke</button>
+    </div>
+</body>
+<script>
+
+var jokes  = document.getElementById('joke');
+document.getElementById('nextJoke').addEventListener('click',() => {
+    var promise = new Promise( (resolve,reject) => {
+        fetch('https://icanhazdadjoke.com/',{
+            headers: {
+                Accept: "application/json"
+            },
+        }).then((res) => {
+            console.log(res)
+            if(res.status){
+            resolve(res.json())
+        }else if( res.status != 200){
+            reject('failed to load');
+        }
+    })
+    })
+
+   promise.then((res) =>  jokes.innerHTML = res.joke)
+   promise.catch( err => console.log(err))
+})
+</script>
+</html>
