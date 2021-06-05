@@ -11,6 +11,7 @@
         <h3>Using Fetch APi to Collect JOKES 🤣 </h3>
         <div id="joke" class="joke"> 😆 JOKE is Loading </div>
         <button id="nextJoke">Next Joke</button>
+        <button id="nextJokeAsync">Next Async Joke</button>
     </div>
 </body>
 <script>
@@ -23,7 +24,6 @@ document.getElementById('nextJoke').addEventListener('click',() => {
                 Accept: "application/json"
             },
         }).then((res) => {
-            console.log(res)
             if(res.status){
             resolve(res.json())
         }else if( res.status != 200){
@@ -35,5 +35,24 @@ document.getElementById('nextJoke').addEventListener('click',() => {
    promise.then((res) =>  jokes.innerHTML = res.joke)
    promise.catch( err => console.log(err))
 })
+
+document.getElementById('nextJokeAsync').addEventListener('click',async () => {
+try{
+    var res = await fetch('https://icanhazdadjoke.com/',{
+            headers: {
+                Accept: "application/json"
+            },
+        });
+        var data = await res.json();
+        jokes.innerHTML = data.joke;
+}catch(ex){
+    console.log(ex);
+}
+        
+})
+
+
+
+
 </script>
 </html>
