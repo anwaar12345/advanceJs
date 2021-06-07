@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Thermometer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body{
+            background-color: rgb(24, 107, 107);
+        }
+        .outer{
+            position: relative;
+        }
+       .innerDiv{
+        position: absolute;
+        left: 400px;
+        font-size: 40px;
+        }
+    </style>
+</head>
+<body>
+<div class="outer"> 
+<div class="innerDiv">
+    <h1>I am Thermometer <span id="temp" class="fa"></span> </h1>
+</div>
+</div>
+<script>
+    var temp = document.getElementById('temp');
+    let tempChange = () => {   
+    temp.innerHTML = '&#xf2cb';
+    temp.style.color = "black";   
+    setInterval(() => {
+        temp.innerHTML = '&#xf2c9';
+    }, 1000);
+    setInterval(()=>  {
+        temp.innerHTML = "&#xf2c8"; 
+        temp.style.color = "yellow";       
+    },2000);
+    setInterval(()=> {
+        temp.innerHTML = "&#xf2c7";
+        temp.style.color = "red";
+    },3000);
+    setInterval(()=> {
+        temp.innerHTML = '&#xf2cb';
+        temp.style.color = "black";
+    } ,4000);
+}
+  tempChange();
+</script>
+</body>
+</html>
