@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Visitor Counter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    body{
+        background-color: cyan;
+    }
+    .counter-container{
+        display: inline-block;
+        margin: 200px 50px 0px 200px;
+    }
+    span{
+        display: block;
+        margin: 30px 0px 0px -10px;
+    }
+    i{
+        display: block;
+        font-size: 30px;
+    }
+</style>
+</head>
+<body>
+    <div class="counter-container">
+        <i class="fa fa-coffee fa-3x"></i>
+        <div class="counter" data-target ="7000">
+        </div>
+        <span>Completed projects</span>
+    </div>
+    <div class="counter-container">
+        <i class="fa fa-users fa-3x"></i>
+        <div class="counter" data-target ="2000">
+        </div>
+        <span>Happy Clients</span>
+    </div>
+    <div class="counter-container">
+        <i class="fa fa-tasks fa-3x"></i>
+        <div class="counter" data-target ="5000">
+        </div>
+        <span>Tasks in Queue</span>
+    </div>
+    <script>
+        const counters = document.querySelectorAll('.counter');
+        counters.forEach(counter => {
+           counter.innerHTML = 0;
+           const updateCounter  = () => {
+            counterValue = +counter.getAttribute('data-target');
+           const startingCount = Number(counter.innerHTML);
+           const incr = counterValue/100;
+           if(startingCount < counterValue){
+               counter.innerHTML = `${Math.round(startingCount + incr)}`;
+               setTimeout(updateCounter,10);
+           }else{
+            counter.html = counterValue;
+           }
+
+           }
+       
+           updateCounter();
+        });
+    </script>
+</body>
+</html>
