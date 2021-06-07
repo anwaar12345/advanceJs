@@ -7,7 +7,10 @@
     <title>Temperature Convertor</title>
     <style>
         form{
-            margin: 100px;
+            margin: 60px;
+        }
+        #result{
+            margin-left: 100px;
         }
     </style>
 </head>
@@ -25,25 +28,32 @@
     <br>    
     <input type="submit" name="btns" id="btns" value="Convert">
     </form>
+    <br>
+    <br>
+    <div id="result"></div>
     <script>
-       var farToCel = (fah) => {
-        var result = Math.round((fah - 32) * 5/9);
+       const farToCel = (fah) => {
+        let result = Math.round((fah - 32) * 5/9);
         return result;
        } 
-       var celToFar = (cel) => {
-       var result = Math.round((cel * 9/5) + 32)
+       const celToFar = (cel) => {
+       let result = Math.round((cel * 9/5) + 32)
        return result; 
        }
-       var handlers = () => {
-        var tempValue = document.getElementById('temp');
+       const handlers = () => {
+        let tempValue = document.getElementById('temp');
         console.log(tempValue.value);
-        var convert = document.getElementById('types');
-        var convertValue = convert.options[convert.selectedIndex].value;
+        let convert = document.getElementById('types');
+        let convertValue = convert.options[convert.selectedIndex].value;
+        let results;
+        let resultDiv = document.getElementById('result');
         if(convertValue == 'cel'){
-            console.log(farToCel(tempValue.value));
+            results = farToCel(tempValue.value);
+            resultDiv.innerHTML = `<P>${results}</p>`;
         }
         if(convertValue == 'fah'){
-            console.log(celToFar(tempValue.value))
+            results = celToFar(tempValue.value);
+            resultDiv.innerHTML = `<P>${results}</p>`;
         }
        }
     </script>
