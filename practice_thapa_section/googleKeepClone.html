@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Keep Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .heading{
+            background-color: yellow;
+            height: 100px;
+        }
+        .heading > h1{
+            padding: 40px;
+        }
+        .button-div{
+            margin-top: 30px;
+            margin-left:1300px;
+        }
+        .note{
+            display: inline-block;
+            margin: 5px;
+        }
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="heading">
+        <h1><i class="fa fa-sticky-note"></i>Keep Tasks and Info</h1>
+    </div>
+    <div class="button-div">
+        <button id="addTask">Add <i class="fa fa-plus-square"></i></button>
+    </div>
+    
+    <script>
+        const updateLsData = () => { 
+            const textAreasData = document.querySelectorAll('textarea');
+            const notes = [];
+            textAreasData.forEach(note => notes.push(note.value));
+            localStorage.setItem('notes',JSON.stringify(notes));
+        } 
+        const addTask = (text = '') => {
+            var divMain = document.createElement('div');
+            divMain.classList.add('note');
+            const htmlData = ` <div class="note">
+        <div class="operation">
+            <button id="edit">Edit  <i class="fa fa-edit"></i></button>
+            <button id="delete">Delete  <i class="fa fa-trash"></i></button>
+    </div>
+    <div class="main ${text ? '': 'hidden' }"> </div>
+    <textarea class="${text ? 'hidden': '' }" name="" id="" cols="30" rows="10"></textarea>
+        </div>
+    `;
+    
+         divMain.insertAdjacentHTML('afterbegin',htmlData);
+         var editBtn = divMain.querySelector('#edit');
+         var deleteBtn = divMain.querySelector('#delete');
+         var mainDiv = divMain.querySelector('.main');
+         var areatext = divMain.querySelector('textarea');
+
+         mainDiv.innerHTML = text;
+         areatext.innerHTML = text;
+         deleteBtn.addEventListener('click', () => 
+         {
+            divMain.remove();
+            updateLsData();
+        });
+         editBtn.addEventListener('click',() => {
+             mainDiv.classList.toggle('hidden');
+             areatext.classList.toggle('hidden')
+         });
+         areatext.addEventListener('change',(e) => {
+             const valueNote = e.target.value;
+             mainDiv.innerHTML = valueNote;
+             areatext.innerHTML = valueNote;
+             updateLsData();
+         });
+         document.body.appendChild(divMain);
+
+        }
+
+        const notes = JSON.parse(localStorage.getItem('notes'));
+        if(notes != null){
+            notes.forEach( note => {
+                addTask(note);
+            });
+        }
+        document.getElementById('addTask').addEventListener('click',() => addTask());
+       
+        
+    </script>
+</body>
+</html>     
