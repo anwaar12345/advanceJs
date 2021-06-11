@@ -36,10 +36,21 @@ console.log(finder);
 const fil = comments.filter(comment => comment.id != null);
 console.log(fil)
 
-//delete data after find
+//delete data after find splice mutate array and slice returns new array object and 
+//splice(index,toremove,toaddoptional)
+// slice(index,length)
+console.log(comments,'before splice');
+const index = comments.findIndex(comment => comment.id == "2039842");
+console.log(index,'index to delete value');
+comments.splice(index,1);
+console.log(comments,'After splice');
 
+const newComments = [
+  comments.slice(0,index),
+  comments.slice(index + 1)
+];
 
-
+console.table(...newComments,'after slice');
 
 </script>
 </body>
